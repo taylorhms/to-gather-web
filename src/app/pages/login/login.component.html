@@ -1,0 +1,15 @@
+<app-tg-header></app-tg-header>
+<div class="container">
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="input-login" class="form-label">Nome de usuario</label>
+          <input type="email" class="form-control" id="input-login" formControlName="login" aria-describedby="emailHelp" placeholder="seunome">
+          <div id="emailHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3">
+          <label for="input-senha" class="form-label">Senha</label>
+          <input type="password" class="form-control" id="input-senha" formControlName="senha" placeholder="Sua senha">
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+</div>

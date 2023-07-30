@@ -1,0 +1,49 @@
+<app-tg-header></app-tg-header>
+<div class="container">
+    <form>
+        <div class="mb-3">
+          <label for="input-nome" class="form-label">Nome</label>
+          <input type="email" class="form-control" id="input-nome" aria-describedby="emailHelp" placeholder="Seu nome">
+          <div id="emailHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3">
+          <label for="input-login" class="form-label">Nome de usuario</label>
+          <input type="email" class="form-control" id="input-login" aria-describedby="emailHelp" placeholder="seunome">
+          <div id="emailHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3">
+          <label for="input-senha" class="form-label">Senha</label>
+          <input type="password" class="form-control" id="input-senha" placeholder="Sua senha">
+        </div>
+        <div class="mb-3">
+          <!-- <label for="input-confirma" class="form-label">Confirme sua senha</label> -->
+          <input type="password" class="form-control" id="input-confirm" placeholder="Confirme sua senha">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="input-termos">
+          <label class="form-check-label" for="input-termos">Li e concordo com os <a routerLink="/termos-de-uso">Termos de Uso</a>.</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <form action="/action_page.php" class="was-validated">
+        <div class="mb-3 mt-3">
+          <label for="uname" class="form-label">Username:</label>
+          <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="mb-3">
+          <label for="pwd" class="form-label">Password:</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="myCheck"  name="remember" required>
+          <label class="form-check-label" for="myCheck">I agree on blabla.</label>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Check this checkbox to continue.</div>
+        </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
