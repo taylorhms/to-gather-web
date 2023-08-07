@@ -10,8 +10,19 @@ export class TgMessageComponent {
   author: string = 'author';
 
   @Input()
-  message: string = 'Your message here...';
+  content: string = 'Your message here...';
 
   @Input()
   login: string = 'username';
+
+  @Input()
+  date: string = '01/01/1990';
+
+  @Input()
+  time: string = '00:00';
+
+  @Input()
+  alignment: 'right' | 'left' = 'left';
+
+  alignClass = (this.alignment == 'left') ? 'flex-row': 'flex-row-reverse';
 }

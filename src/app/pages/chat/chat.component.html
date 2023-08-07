@@ -1,21 +1,38 @@
 <div class="d-flex flex-column h-100">
-    <app-tg-header></app-tg-header>
-    <div class="row w-100 m-0 flex-grow-1 overflow-auto">
-      <div class="menu col-sm-4 p-0 offcanvas-sm bg-light h-100">
-        <p>About Me</p>
-        
+  <app-tg-header></app-tg-header>
+
+  <div class="row w-100 m-0 flex-grow-1 overflow-auto">
+    <!-- menu lateral -->
+    <div class="menu text-bg-secondary bg-opacity-50 col-sm-4 p-0 offcanvas-sm h-100">
+      <p>About Me</p>
+    </div>
+
+    <div class="col-sm-8 p-0 d-flex flex-column h-100">
+      <!-- area de mensagens -->
+      <div class="flex-grow-1 d-flex flex-column-reverse overflow-auto">
+        <ng-template ngFor let-msg [ngForOf]="mensagens">
+          <app-tg-message
+            [author]="msg.autor.nome"
+            [login]="msg.autor.login"
+            [content]="msg.conteudo"
+            [date]="msg.dataEnvio.split('T')[0]"
+            [time]="msg.dataEnvio.substr(11, 5)"
+            [alignment]="msg.autor.login == usuarioLoginAtual ? 'right' : 'left'"></app-tg-message>
+        </ng-template>
       </div>
-      <div class="col-sm-8 p-0 d-flex flex-column h-100">
-        <div class="flex-grow-1 d-flex flex-column-reverse overflow-auto">
-            <app-tg-message author="John" login="john_doe" message="Lorem ipsum..."></app-tg-message>
-            <app-tg-message author="Anna" login="anna_b" message="Message 2..."></app-tg-message>
-            <app-tg-message author="Paul" login="paul" message="This is a very very very very very very very very very very long long long long long message"></app-tg-message>
-            <app-tg-message author="Richard" login="rich_ard" message="Another message"></app-tg-message>
-            <app-tg-message author="Sandy" login="sandynewman" message="This is last, but the first one..."></app-tg-message>
-        </div>
-        <div class="bg-primary">
-            <p>working</p>
-        </div>
+
+      <!-- area de envio de mensagens -->
+      <div class="text-bg-secondary bg-opacity-25 p-2">
+        <form [formGroup]="formEnvio" (ngSubmit)="enviarMensagem()">
+          <div class="input-group">
+            <input type="text" class="form-control" formControlName="mensagem" placeholder="Escreva sua mensagem">
+            <button class="btn btn-primary" type="submit">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
       </div>
+
     </div>
   </div>
+</div>
