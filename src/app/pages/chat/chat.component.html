@@ -4,7 +4,23 @@
   <div class="row w-100 m-0 flex-grow-1 overflow-auto">
     <!-- menu lateral -->
     <div class="menu text-bg-secondary bg-opacity-50 col-sm-4 p-0 offcanvas-sm h-100">
-      <p>About Me</p>
+      <ul>
+        <li *ngFor="let usuario of usuarios | keyvalue">
+          
+            <div class="profile-picture">
+              <img class="rounded-circle m-2" style="width: 4em;" src="assets/avatar.png" alt="{{ usuario.value.login }}">
+            </div>
+          
+            <div class="">
+              <div class="" style="height: 2em;">
+                <span class="me-auto pe-3">{{ usuario.value.nome }}</span>
+                <span>@{{ usuario.value.login }}</span>
+              </div>
+              <div class="status" style="height: 2em;">online</div>
+            </div>
+          
+        </li>
+      </ul>
     </div>
 
     <div class="col-sm-8 p-0 d-flex flex-column h-100">
@@ -12,12 +28,14 @@
       <div class="flex-grow-1 d-flex flex-column-reverse overflow-auto">
         <ng-template ngFor let-msg [ngForOf]="mensagens">
           <app-tg-message
-            [author]="msg.autor.nome"
-            [login]="msg.autor.login"
+            [author]="msg.autor?.nome || ''"
+            [login]="msg.autor?.login || ''"
             [content]="msg.conteudo"
-            [date]="msg.dataEnvio.split('T')[0]"
+            [date]="msg.dataEnvio.substr(0, 10)"
             [time]="msg.dataEnvio.substr(11, 5)"
-            [alignment]="msg.autor.login == usuarioLoginAtual ? 'right' : 'left'"></app-tg-message>
+            [alignment]="msg.autor?.login == usuarioLoginAtual ? 'right' : 'left'"
+            [bgColor]="msg.autor?.corSecundaria || 'blue'"
+            [titleColor]="msg.autor?.corPrimaria || 'blue'"></app-tg-message>
         </ng-template>
       </div>
 

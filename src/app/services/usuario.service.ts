@@ -15,4 +15,8 @@ export class UsuarioService {
   novaConta(dados: NovaConta) {
     return this.http.post<any>(`${environment.apiUrl}/usuario`, dados);
   }
+
+  carregar() {
+    return this.http.get<any>(`${environment.apiUrl}/usuario`);
+  }
 }

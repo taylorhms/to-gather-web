@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EnvioMensagem } from 'src/app/models/envio-mensagem';
 import { Mensagem } from 'src/app/models/mensagem';
+import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { MensagemService } from 'src/app/services/mensagem.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-chat',
@@ -17,17 +19,25 @@ export class ChatComponent implements OnInit {
   });
 
   mensagens: Mensagem[] = [];
+  usuarios: { [key: string]: Usuario } = {};
   usuarioLoginAtual: string | null = null;
+  intervalMensagem?: number;
+  intervalUsuario?: number;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private mensagemService: MensagemService
+    private mensagemService: MensagemService,
+    private usuarioService: UsuarioService
   ) {}
 
   ngOnInit(): void {
     this.usuarioLoginAtual = AuthService.usuarioLogin;
     this.carregarMensagens();
+    this.carregarUsuarios();
+    
+    this.intervalMensagem = window.setInterval(()=>{this.carregarMensagens()}, 1500);
+    this.intervalUsuario = window.setInterval(()=>{this.carregarUsuarios()}, 10000);
   }
 
   enviarMensagem(): void {
@@ -50,11 +60,45 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  carregarMensagens() {
+  carregarMensagens(): void {
     this.mensagemService.carregar().subscribe({
-      next: (response: Mensagem[]) => {
-        this.mensagens = response;
+      next: (responseMensagens: Mensagem[]) => {
+        let precisaAtualizar: boolean = false;
+
+        responseMensagens.forEach(msg => {
+          if (!(msg.loginAutor in this.usuarios)) {
+            precisaAtualizar = true;
+          }
+        });
+
+        if (precisaAtualizar) {
+          this.carregarUsuarios(responseMensagens);
+        } else {
+          this.listarMensagens(responseMensagens);
+        }
       }
-    })
+    });
+  }
+
+  carregarUsuarios(novasMensagens?: Mensagem[]): void {
+    this.usuarioService.carregar().subscribe({
+      next: (responseUsuarios: Usuario[]) => {
+        this.usuarios = {};
+        responseUsuarios.forEach(usuario => {
+          this.usuarios[usuario.login] = usuario;
+        });
+        if (novasMensagens) {
+          this.listarMensagens(novasMensagens);
+        }
+      }
+    });
+  }
+
+  listarMensagens(novas: Mensagem[]): void {
+    novas.forEach(msg => {
+      msg.autor = this.usuarios[msg.loginAutor];
+    });
+
+    this.mensagens = novas;
   }
 }

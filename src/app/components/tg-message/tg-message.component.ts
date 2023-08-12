@@ -22,6 +22,12 @@ export class TgMessageComponent {
   time: string = '00:00';
 
   @Input()
+  bgColor: string = 'blue';
+
+  @Input()
+  titleColor: string = 'blue';
+
+  @Input()
   alignment: 'right' | 'left' = 'left';
 
   alignClass = (this.alignment == 'left') ? 'flex-row': 'flex-row-reverse';

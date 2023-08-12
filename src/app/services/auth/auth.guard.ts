@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 let router: Router;
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const currentUser = AuthService.tokenValue || true; // true for testing only
+  const currentUser = AuthService.tokenValue;
   if (currentUser) {
       return true;
   }
