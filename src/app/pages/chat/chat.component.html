@@ -1,24 +1,30 @@
 <div class="d-flex flex-column h-100">
-  <app-tg-header></app-tg-header>
+  <app-tg-header [showMenuButton]="true"></app-tg-header>
 
   <div class="row w-100 m-0 flex-grow-1 overflow-auto">
     <!-- menu lateral -->
-    <div class="menu border-end col-sm-4 p-4 offcanvas-sm h-100">
-      <ul class="list-group list-group-flush">
+    <div class="offcanvas-sm offcanvas-start border-end col-sm-4 p-0" id="menu">
+      <div class="menu-conteudo">
+        <h3 class="border-bottom p-3">Usuários</h3>
+        <ul class="list-group list-group-flush p-3">
 
-        <!-- usuario -->
-        <li class="d-flex list-group-item" style="background: none;" *ngFor="let usuario of usuarios | keyvalue">
-          <div class="profile-picture">
-            <img class="rounded-circle m-2" style="width: 3em;" src="assets/avatar.png" alt="{{ usuario.value.login }}">
-          </div>
-          <div class="flex-grow-1">
-            <div class="" [style]="{ color: usuario.value.corPrimaria }">{{ usuario.value.nome }}</div>
-            <div class="text-secondary text-small">@{{ usuario.value.login }}</div>
-            <div class="status text-success text-small">online</div>
-          </div>
-        </li>
+          <!-- usuario -->
+          <ng-template ngFor let-usuario [ngForOf]="usuarios | keyvalue">
+            <li class="d-flex list-group-item p-0" style="background: none;" *ngIf="usuario.value.login != usuarioLoginAtual">
+              <div class="profile-picture">
+                <img class="rounded-circle m-2" style="width: 3em;" src="assets/avatar.png" alt="{{ usuario.value.login }}">
+              </div>
+              <div class="flex-grow-1">
+                <div class="text-truncate" [style]="{ color: usuario.value.corPrimaria }">{{ usuario.value.nome }}</div>
+                <div class="text-secondary" style="font-size: .8em;">@{{ usuario.value.login }}</div>
+                <div class="status text-success" style="font-size: .7em; font-weight: bold;">online</div>
+              </div>
+            </li>
+          </ng-template>
+        </ul>
 
-      </ul>
+        <h2 class="p-3 border-top">Footer</h2>
+      </div>
     </div>
 
     <div class="col-sm-8 p-0 d-flex flex-column h-100">

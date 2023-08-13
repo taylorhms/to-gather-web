@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tg-header',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./tg-header.component.css']
 })
 export class TgHeaderComponent {
-
+  @Input() showMenuButton: boolean = false;
 }

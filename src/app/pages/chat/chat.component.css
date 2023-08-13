@@ -1,0 +1,13 @@
+#menu {
+    max-width: 70%;
+}
+
+.menu-conteudo {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.menu-conteudo ul {
+    flex-grow: 1;
+}
