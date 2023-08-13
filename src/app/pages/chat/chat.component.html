@@ -1,0 +1,54 @@
+<div class="d-flex flex-column h-100">
+  <app-tg-header></app-tg-header>
+
+  <div class="row w-100 m-0 flex-grow-1 overflow-auto">
+    <!-- menu lateral -->
+    <div class="menu border-end col-sm-4 p-4 offcanvas-sm h-100">
+      <ul class="list-group list-group-flush">
+
+        <!-- usuario -->
+        <li class="d-flex list-group-item" style="background: none;" *ngFor="let usuario of usuarios | keyvalue">
+          <div class="profile-picture">
+            <img class="rounded-circle m-2" style="width: 3em;" src="assets/avatar.png" alt="{{ usuario.value.login }}">
+          </div>
+          <div class="flex-grow-1">
+            <div class="" [style]="{ color: usuario.value.corPrimaria }">{{ usuario.value.nome }}</div>
+            <div class="text-secondary text-small">@{{ usuario.value.login }}</div>
+            <div class="status text-success text-small">online</div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="col-sm-8 p-0 d-flex flex-column h-100">
+      <!-- area de mensagens -->
+      <div class="flex-grow-1 d-flex flex-column-reverse overflow-auto">
+        <ng-template ngFor let-msg [ngForOf]="mensagens">
+          <app-tg-message
+            [author]="msg.autor?.nome || ''"
+            [login]="msg.autor?.login || ''"
+            [content]="msg.conteudo"
+            [date]="msg.dataEnvio.substr(0, 10)"
+            [time]="msg.dataEnvio.substr(11, 5)"
+            [alignment]="msg.autor?.login == usuarioLoginAtual ? 'right' : 'left'"
+            [bgColor]="msg.autor?.corSecundaria || 'blue'"
+            [titleColor]="msg.autor?.corPrimaria || 'blue'"></app-tg-message>
+        </ng-template>
+      </div>
+
+      <!-- area de envio de mensagens -->
+      <div class="text-bg-secondary bg-opacity-25 p-2">
+        <form [formGroup]="formEnvio" (ngSubmit)="enviarMensagem()">
+          <div class="input-group">
+            <input type="text" class="form-control" formControlName="mensagem" placeholder="Escreva sua mensagem">
+            <button class="btn btn-primary" type="submit">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

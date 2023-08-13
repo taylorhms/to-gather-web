@@ -1,0 +1,27 @@
+.tg-message {
+    max-width: 70%;
+    position: relative;
+}
+
+.bg-color {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.25;
+    z-index: -1;
+}
+
+.title {
+    font-size: small;
+}
+
+.date-time {
+    font-size: .6em;
+}
+
+.profile-picture img {
+    width: 70%;
+}
+
