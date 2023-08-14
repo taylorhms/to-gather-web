@@ -32,10 +32,32 @@
       <input class="form-check-input" (change)="termosCheck = termosCheck == null ? true : !termosCheck"
         [ngClass]="termosCheck == null ? '' : termosCheck ? 'is-valid' : 'is-invalid'" type="checkbox" id="input-termos"
         name="check" required>
-      <label class="form-check-label" for="input-termos">Li e concordo com os <a routerLink="/termos-de-uso">Termos de
+      <label class="form-check-label" for="input-termos">Li e concordo com os <a href="" data-bs-toggle="modal" data-bs-target="#modal-termos">Termos de
           Uso</a>.</label>
       <div class="invalid-feedback">Voc&ecirc; precisa concordar para continuar.</div>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="formNovaConta.invalid || !termosCheck">Submit</button>
   </form>
+
+  <!-- modal termos de uso -->
+  <div class="modal" id="modal-termos" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h5 class="modal-title">Termos de Uso</h5>
+        </div>
+        <div class="modal-body">
+          <p>Ao  utilizar nossa aplicação, você concorda estar ciente de que:</p>
+          <ul>
+            <li>Seus dados ficaram armazendos na nossa base de dados apenas enquanto nosso servidor estiver funcionando.</li>
+            <li>Nenhuma das mensagens enviadas será mantida após o encerramento do servidor.</li>
+            <li>Está aplicação está em desenvolvimento, falhas podem ocorrer com frequência.</li>
+          </ul>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
