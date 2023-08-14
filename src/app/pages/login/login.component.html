@@ -1,15 +1,23 @@
-<app-tg-header></app-tg-header>
-<div class="container">
-    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+<div class="d-flex flex-column h-100 p-0">
+  <app-tg-header></app-tg-header>
+  
+  <div class="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="card col-10 col-sm-8 col-md-5">
+      <h3 class="card-header text-center">Login</h3>
+      <div class="card-body">
         <div class="mb-3">
           <label for="input-login" class="form-label">Nome de usuario</label>
-          <input type="email" class="form-control" id="input-login" formControlName="login" aria-describedby="emailHelp" placeholder="seunome">
-          <div id="emailHelp" class="form-text"></div>
+          <input type="text" class="form-control" id="input-login" formControlName="login" placeholder="seunome">
         </div>
         <div class="mb-3">
           <label for="input-senha" class="form-label">Senha</label>
           <input type="password" class="form-control" id="input-senha" formControlName="senha" placeholder="Sua senha">
         </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
-      </form>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary col-12" [disabled]="formLogin.invalid">Entrar</button>
+      </div>
+    </form>
+    <a routerLink="/sign-up" class="mt-2">Não tenho uma conta</a>
+  </div>
 </div>

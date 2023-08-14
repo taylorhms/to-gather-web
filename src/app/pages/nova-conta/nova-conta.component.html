@@ -1,43 +1,59 @@
-<app-tg-header></app-tg-header>
-<div class="container">
-  <form class="needs-validation col-sm-6 mx-auto" [formGroup]="formNovaConta" (ngSubmit)="onSubmit()">
-    <div class="mb-3 mt-3">
-      <label for="input-nome" class="form-label">Nome:</label>
-      <input type="text" [ngClass]="nome.untouched ? '' : nome.invalid ? 'is-invalid' : 'is-valid'" class="form-control"
-        id="input-nome" placeholder="Seu nome" name="nome" formControlName="nome" required>
-      <div class="invalid-feedback">Voc&ecirc; precisa informar seu nome.</div>
-    </div>
-    <div class="mb-3">
-      <label for="input-login" class="form-label">Nome de usuario:</label>
-      <input type="text" [ngClass]="login.untouched ? '' : login.invalid ? 'is-invalid' : 'is-valid'"
-        class="form-control" id="input-login" placeholder="seunome" name="login" formControlName="login" required>
-      <div class="invalid-feedback">Nome de usu&aacute;rio inv&aacute;lido.</div>
-    </div>
-    <div class="mb-3">
-      <label for="input-senha" class="form-label">Senha:</label>
-      <input type="password" [ngClass]="senha.untouched ? '' : senha.invalid ? 'is-invalid' : 'is-valid'"
-        class="form-control" id="input-senha" placeholder="Sua senha" name="senha" formControlName="senha" minlength="4"
-        required>
-      <div class="invalid-feedback">A senha deve ter pelo menos 4 caracteres.</div>
-    </div>
-    <div class="mb-3">
-      <label for="input-confirma" class="form-label hidden">Confirme sua senha:</label>
-      <input type="password"
-        [ngClass]="confirmaSenha.untouched ? '' : confirmaSenha.invalid || !senhaIguais() ? 'is-invalid' : 'is-valid'"
-        class="form-control" id="input-confirma" placeholder="Confirme sua senha" name="confirmaSenha"
-        formControlName="confirmaSenha" required>
-      <div class="invalid-feedback">As senhas n&atilde;o conferem.</div>
-    </div>
-    <div class="form-check mb-3">
-      <input class="form-check-input" (change)="termosCheck = termosCheck == null ? true : !termosCheck"
-        [ngClass]="termosCheck == null ? '' : termosCheck ? 'is-valid' : 'is-invalid'" type="checkbox" id="input-termos"
-        name="check" required>
-      <label class="form-check-label" for="input-termos">Li e concordo com os <a href="" data-bs-toggle="modal" data-bs-target="#modal-termos">Termos de
-          Uso</a>.</label>
-      <div class="invalid-feedback">Voc&ecirc; precisa concordar para continuar.</div>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="formNovaConta.invalid || !termosCheck">Submit</button>
-  </form>
+<div class="d-flex flex-column h-100 p-0">
+  <app-tg-header></app-tg-header>
+  
+  <div class="d-flex flex-column flex-grow-1 justify-content-center justify-content-md-start py-5 align-items-center overflow-auto">
+    <form class="needs-validation card col-10 col-sm-8 col-md-5" [formGroup]="formNovaConta" (ngSubmit)="onSubmit()">
+      <h3 class="card-header text-center">Nova Conta</h3>
+
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="input-nome" class="form-label">Nome:</label>
+          <input type="text" [ngClass]="nome.untouched ? '' : nome.invalid ? 'is-invalid' : 'is-valid'" class="form-control"
+            id="input-nome" placeholder="Seu nome" name="nome" formControlName="nome" required>
+          <div class="invalid-feedback">Voc&ecirc; precisa informar seu nome.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="input-login" class="form-label">Nome de usuario:</label>
+          <input type="text" [ngClass]="login.untouched ? '' : login.invalid ? 'is-invalid' : 'is-valid'"
+            class="form-control" id="input-login" placeholder="seunome" name="login" formControlName="login" required>
+          <div class="invalid-feedback">Nome de usu&aacute;rio inv&aacute;lido.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="input-senha" class="form-label">Senha:</label>
+          <input type="password" [ngClass]="senha.untouched ? '' : senha.invalid ? 'is-invalid' : 'is-valid'"
+            class="form-control" id="input-senha" placeholder="Sua senha" name="senha" formControlName="senha" minlength="4"
+            required>
+          <div class="invalid-feedback">A senha deve ter pelo menos 4 caracteres.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="input-confirma" class="form-label d-none">Confirme sua senha:</label>
+          <input type="password"
+            [ngClass]="confirmaSenha.untouched ? '' : confirmaSenha.invalid || !senhaIguais() ? 'is-invalid' : 'is-valid'"
+            class="form-control" id="input-confirma" placeholder="Confirme sua senha" name="confirmaSenha"
+            formControlName="confirmaSenha" required>
+          <div class="invalid-feedback">As senhas n&atilde;o conferem.</div>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" (change)="termosCheck = termosCheck == null ? true : !termosCheck"
+            [ngClass]="termosCheck == null ? '' : termosCheck ? 'is-valid' : 'is-invalid'" type="checkbox" id="input-termos"
+            name="check" required>
+          <label class="form-check-label" for="input-termos">Li e concordo com os
+            <a href="" data-bs-toggle="modal" data-bs-target="#modal-termos">Termos de Uso</a>.
+          </label>
+          <div class="invalid-feedback">Voc&ecirc; precisa concordar para continuar.</div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary col-12" [disabled]="formNovaConta.invalid || !termosCheck">Criar conta</button>
+      </div>
+    </form>
+    <a routerLink="/login" class="mt-2">Já tenho uma conta</a>
+  </div>
 
   <!-- modal termos de uso -->
   <div class="modal" id="modal-termos" tabindex="-1">
