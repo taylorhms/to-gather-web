@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './services/auth/token.interceptor';
 import { ChatComponent } from './pages/chat/chat.component';
 import { TgMessageComponent } from './components/tg-message/tg-message.component';
+import { ConfigsComponent } from './pages/configs/configs.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TgMessageComponent } from './components/tg-message/tg-message.component
     LoginComponent,
     NovaContaComponent,
     ChatComponent,
-    TgMessageComponent
+    TgMessageComponent,
+    ConfigsComponent
   ],
   imports: [
     BrowserModule,

@@ -5,12 +5,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { NovaContaComponent } from './pages/nova-conta/nova-conta.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { authGuard } from './services/auth/auth.guard';
+import { ConfigsComponent } from './pages/configs/configs.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: NovaContaComponent },
   { path: 'chat', component: ChatComponent, canActivate: [authGuard] },
+  { path: 'perfil/:login', component: ConfigsComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
