@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EnvioMensagem } from 'src/app/models/envio-mensagem';
@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   formEnvio: FormGroup = this.formBuilder.group({
     mensagem: ['', Validators.required]
   });
@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit {
   mensagens: Mensagem[] = [];
   usuarios: { [key: string]: Usuario } = {};
   usuarioLoginAtual: string | null = null;
+  usuarioAtual: Usuario | null = null;
   intervalMensagem?: number;
   intervalUsuario?: number;
 
@@ -38,6 +39,11 @@ export class ChatComponent implements OnInit {
     
     this.intervalMensagem = window.setInterval(()=>{this.carregarMensagens()}, 1500);
     this.intervalUsuario = window.setInterval(()=>{this.carregarUsuarios()}, 10000);
+  }
+
+  ngOnDestroy(): void {
+    window.clearInterval(this.intervalMensagem);
+    window.clearInterval(this.intervalUsuario);
   }
 
   enviarMensagem(): void {
@@ -86,6 +92,9 @@ export class ChatComponent implements OnInit {
         this.usuarios = {};
         responseUsuarios.forEach(usuario => {
           this.usuarios[usuario.login] = usuario;
+          if (usuario.login == this.usuarioLoginAtual) {
+            this.usuarioAtual = usuario;
+          }
         });
         if (novasMensagens) {
           this.listarMensagens(novasMensagens);
@@ -100,5 +109,9 @@ export class ChatComponent implements OnInit {
     });
 
     this.mensagens = novas;
+  }
+
+  visualizarPerfil(): void {
+    this.router.navigate(['perfil', this.usuarioAtual?.id]);
   }
 }

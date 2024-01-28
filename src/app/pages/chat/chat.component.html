@@ -23,7 +23,17 @@
           </ng-template>
         </ul>
 
-        <h2 class="p-3 border-top">Footer</h2>
+        <div class="d-flex border-top" (click)="visualizarPerfil()">
+          <div class="profile-picture">
+            <img class="rounded-circle m-2" style="width: 3em;" src="assets/avatar.png" alt="{{ usuarioLoginAtual }}">
+          </div>
+          <div class="flex-grow-1">
+            <!--
+            <div class="text-truncate" [style]="{ color: usuario.value.corPrimaria }">{{ usuario.value.nome }}</div>
+            -->
+            <div class="text-secondary" style="font-size: .8em;">@{{ usuarioLoginAtual }}</div>
+          </div>
+        </div>
       </div>
     </div>
 
